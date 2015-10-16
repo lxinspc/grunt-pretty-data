@@ -1,0 +1,12 @@
+{
+  "boss": true,
+  "curly": true,
+  "eqeqeq": true,
+  "immed": true,
+  "latedef": true,
+  "newcap": true,
+  "noarg": true,
+  "node": true,
+  "undef": true,
+  "unused": true
+}
