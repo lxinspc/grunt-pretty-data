@@ -67,9 +67,14 @@ module.exports = function (grunt) {
         options: { minify: true, preserveComments: false, filetypes: ['xml'] },
         files: { 'tmp/single/min': ['test/fixtures/*']}
       },
-//      json: {
-//        options: { minify: false, filetypes: ['json'] }
-//      },
+      json: {
+        options: { minify: false, filetypes: ['json'] },
+        files: { 'tmp/single/unmin': ['test/fixtures/*']}
+      },
+      jsonmin: {
+        options: { minify: true, filetypes: ['json'] },
+        files: { 'tmp/single/min': ['test/fixtures/*']}
+      },
 //      css: {
 //        options: { minify: false, filetypes: ['css'] }
 //      },

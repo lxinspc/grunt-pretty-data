@@ -27,27 +27,42 @@ exports.pretty_data = {
     // setup here if necessary
     done();
   },
-//  xml: function (test) {
-//    test.expect(1);
-//    var expected = grunt.file.read('test/expected/single/unmin/test.xml');
-//    var actual = grunt.file.read('tmp/single/unmin/test.xml');
-//    test.equal(actual, expected, 'File has been pretty printed correctly');
-//    test.done();
-//  },
+  xml: function (test) {
+    test.expect(1);
+    var expected = grunt.file.read('test/expected/single/unmin/test.xml');
+    var actual = grunt.file.read('tmp/single/unmin/test.xml');
+    test.equal(actual, expected, 'File has been pretty printed correctly');
+    test.done();
+  },
   xmlmincom: function (test) {
     test.expect(1);
     var expected = grunt.file.read('test/expected/single/mincom/test.xml');
     var actual = grunt.file.read('tmp/single/mincom/test.xml');
-    test.equal(actual, expected, 'File has been pretty printed correctly');
+    test.equal(actual, expected, '02 - xmlmincom failed');
     test.done();
   },
   xmlmin: function (test) {
     test.expect(1);
     var expected = grunt.file.read('test/expected/single/min/test.xml');
     var actual = grunt.file.read('tmp/single/min/test.xml');
-    test.equal(actual, expected, 'File has been pretty printed correctly');
+    test.equal(actual, expected, '03 - xmlmin failed');
     test.done();
   },
+//  json: function (test) {
+//    test.expect(1);
+//    var expected = grunt.file.read('test/expected/single/unmin/test.json');
+//    var actual = grunt.file.read('tmp/single/unmin/test.json');
+//    test.equal(actual, expected, '04 - json failed');
+//    test.done();
+//  },
+  jsonmin: function (test) {
+    test.expect(1);
+    var expected = grunt.file.read('test/expected/single/min/test.json');
+    var actual = grunt.file.read('tmp/single/min/test.json');
+    test.equal(actual, expected, '05 - jsonmin failed');
+    test.done();
+  },
+
 //  custom_options: function (test) {
 //    test.expect(1);
 //

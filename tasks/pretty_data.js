@@ -24,11 +24,13 @@ module.exports = function (grunt) {
     var oFiletypes = {};
     //Build functions we will execute for each
     grunt.verbose.writeln(chalk.white.underline('Building function map for filetypes specified'));
+    var mSupportComments = { xml: true, css: true, json: false, sql: false };
     options.filetypes.forEach(function(filetype) {
       var sPdFunction = (options.minify) ? filetype + 'min' : filetype;
       oFiletypes[filetype] = {
         name: sPdFunction,
-        fnPrettyData: pd[sPdFunction]
+        fnPrettyData: pd[sPdFunction],
+        supportComments: mSupportComments[filetype]
       };
       grunt.verbose.writeln('Filetype: ' + chalk.cyan(filetype) + ' will be processed with ' + chalk.red('pd.' + sPdFunction));
     });
@@ -49,10 +51,10 @@ module.exports = function (grunt) {
         grunt.log.writeln(chalk.blue(filepath) + ' will be processed by ' +chalk.red(oFiletypes[sFiletype].name));
         try {
           var sMax = grunt.file.read(filepath);
-          sMin = oFiletypes[sFiletype].fnPrettyData(sMax,options.preserveComments);
+          sMin = (oFiletypes[sFiletype].supportComments) ? oFiletypes[sFiletype].fnPrettyData(sMax,options.preserveComments) : oFiletypes[sFiletype].fnPrettyData(sMax,options);
           var sFile = filepath.match(/\/([^/]*)$/)[1];
           grunt.file.write(file.dest + '/' + sFile,sMin);
-          var sOption = (options.preserveComments) ? ' --preserve-comments' : '';
+          var sOption = (options.preserveComments && oFiletypes[sFiletype].supportComments) ? ' --preserve-comments' : '';
           grunt.log.writeln(chalk.blue.underline(filepath) + ' written using ' + chalk.red(oFiletypes[sFiletype].name + sOption) + ' to ' + chalk.blue.underline(file.dest + '/' + sFile));
         } catch (err) {
           grunt.log.warn(chalk.blue(filepath) + ' has error ' + chalk.red.underline(err));
