@@ -1,4 +1,4 @@
-# grunt-pretty-data
+# grunt-pretty-data [![Build Status](https://travis-ci.org/lxinspc/grunt-pretty-data.svg?branch=master)](https://travis-ci.org/lxinspc/grunt-pretty-data)
 
 > Run pretty data against css, sql, json and xml files
 
