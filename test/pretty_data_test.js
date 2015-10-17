@@ -27,22 +27,34 @@ exports.pretty_data = {
     // setup here if necessary
     done();
   },
-  default_options: function (test) {
+  xml: function (test) {
     test.expect(1);
-
-    var actual = grunt.file.read('tmp/default_options');
-    var expected = grunt.file.read('test/expected/default_options');
-    test.equal(actual, expected, 'should describe what the default behavior is.');
-
+    var expected = grunt.file.read('test/expected/single/unmin/test.xml');
+    var actual = grunt.file.read('tmp/single/unmin/test.xml');
+    test.equal(actual, expected, 'File has been pretty printed correctly');
     test.done();
   },
-  custom_options: function (test) {
+  xmlmincom: function (test) {
     test.expect(1);
-
-    var actual = grunt.file.read('tmp/custom_options');
-    var expected = grunt.file.read('test/expected/custom_options');
-    test.equal(actual, expected, 'should describe what the custom option(s) behavior is.');
-
+    var expected = grunt.file.read('test/expected/single/mincom/test.xml');
+    var actual = grunt.file.read('tmp/single/mincom/test.xml');
+    test.equal(actual, expected, 'File has been pretty printed correctly');
     test.done();
-  }
+  },
+  xmlmin: function (test) {
+    test.expect(1);
+    var expected = grunt.file.read('test/expected/single/min/test.xml');
+    var actual = grunt.file.read('tmp/single/min/test.xml');
+    test.equal(actual, expected, 'File has been pretty printed correctly');
+    test.done();
+  },
+//  custom_options: function (test) {
+//    test.expect(1);
+//
+//    var actual = grunt.file.read('tmp/custom_options');
+//    var expected = grunt.file.read('test/expected/custom_options');
+//    test.equal(actual, expected, 'should describe what the custom option(s) behavior is.');
+//
+//    test.done();
+//  }
 };

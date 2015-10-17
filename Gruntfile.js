@@ -32,23 +32,52 @@ module.exports = function (grunt) {
     },
 
     // Configuration to be run (and then tested).
-    pretty_data: {
-      default_options: {
-        options: {
-        },
-        files: {
-          'tmp/default_options': ['test/fixtures/testing', 'test/fixtures/123']
-        }
+    "pretty-data": {
+//      default: {
+//        //files: { 'tmp/json': ['test/fixtures'] }
+//      },
+//      minify_all: {
+//        options: { minify: true }
+//        //files: { 'tmp/json': }
+//      },
+//      minify_none: {
+//        options: { minify: false }
+//      },
+//      minify_xml: {
+//        options: { filetypes: ['xml'] }
+//      },
+//      minify_json: {
+//        options: { filetypes: ['json'] }
+//      },
+//      minify_css: {
+//        options: { filetypes: ['css'] }
+//      },
+//      minify_sql: {
+//        options: { filetypes: ['sql'] }
+//      },
+      xml: {
+        options: { minify: false, filetypes: ['xml'] },
+        files: { 'tmp/single/unmin': ['test/fixtures/*']}
       },
-      custom_options: {
-        options: {
-          separator: ': ',
-          punctuation: ' !!!'
-        },
-        files: {
-          'tmp/custom_options': ['test/fixtures/testing', 'test/fixtures/123']
-        }
-      }
+      xmlmincom: {
+        options: { minify: true, preserveComments: true, filetypes: ['xml'] },
+        files: { 'tmp/single/mincom': ['test/fixtures/*']}
+      },
+      xmlmin: {
+        options: { minify: true, preserveComments: false, filetypes: ['xml'] },
+        files: { 'tmp/single/min': ['test/fixtures/*']}
+      },
+//      json: {
+//        options: { minify: false, filetypes: ['json'] }
+//      },
+//      css: {
+//        options: { minify: false, filetypes: ['css'] }
+//      },
+//      sql: {
+//        options: { minify: false, filetypes: ['sql'] },
+//      },
+      
+      
     },
 
     // Unit tests.
@@ -63,7 +92,7 @@ module.exports = function (grunt) {
 
   // Whenever the "test" task is run, first clean the "tmp" dir, then run this
   // plugin's task(s), then test the result.
-  grunt.registerTask('test', ['clean', 'pretty_data', 'nodeunit']);
+  grunt.registerTask('test', ['clean', 'pretty-data', 'nodeunit']);
 
   // By default, lint and run all tests.
   grunt.registerTask('default', ['jshint', 'test']);
