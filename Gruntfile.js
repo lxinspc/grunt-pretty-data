@@ -55,10 +55,10 @@ module.exports = function (grunt) {
 //      minify_sql: {
 //        options: { filetypes: ['sql'] }
 //      },
-      xml: {
-        options: { minify: false, filetypes: ['xml'] },
-        files: { 'tmp/single/unmin': ['test/fixtures/*']}
-      },
+//      xml: {
+//        options: { minify: false, filetypes: ['xml'] },
+//        files: { 'tmp/single/unmin': ['test/fixtures/*']}
+//      },
       xmlmincom: {
         options: { minify: true, preserveComments: true, filetypes: ['xml'] },
         files: { 'tmp/single/mincom': ['test/fixtures/*']}
