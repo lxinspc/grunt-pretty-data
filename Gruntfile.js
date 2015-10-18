@@ -33,6 +33,17 @@ module.exports = function (grunt) {
 
     // Configuration to be run (and then tested).
     "pretty-data": {
+      default: {
+        files: { 'tmp/multiple/default': ['test/fixtures/*'] }
+      },
+      beautify: {
+        options: { minify: false },
+        files: { 'tmp/multiple/beautify': ['test/fixtures/*'] }      
+      },
+      preserveComments: {
+        options: { minify: true, preserveComments: true },
+        files: { 'tmp/multiple/preserveComments': ['test/fixtures/*'] }      
+      },
       xml: {
         options: { minify: false, filetypes: ['xml'] },
         files: { 'tmp/single/unmin': ['test/fixtures/*']}
