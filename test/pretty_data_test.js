@@ -83,4 +83,18 @@ exports.pretty_data = {
     test.equal(actual, expected, 'test css minify');
     test.done();
   },
+  sql: function (test) {
+    test.expect(1);
+    var expected = grunt.file.read('test/expected/single/unmin/test.sql');
+    var actual = grunt.file.read('tmp/single/unmin/test.sql');
+    test.equal(actual, expected, 'test sql beautify');
+    test.done();
+  },
+  sqlmin: function (test) {
+    test.expect(1);
+    var expected = grunt.file.read('test/expected/single/min/test.sql');
+    var actual = grunt.file.read('tmp/single/min/test.sql');
+    test.equal(actual, expected, 'test sql minify');
+    test.done();
+  },  
 };

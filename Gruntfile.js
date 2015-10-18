@@ -65,6 +65,14 @@ module.exports = function (grunt) {
         options: { minify: true, preserveComments: false, filetypes: ['css'] },
         files: { 'tmp/single/min': ['test/fixtures/*']}
       },
+      sql: {
+        options: { minify: false, filetypes: ['sql'] },
+        files: { 'tmp/single/unmin': ['test/fixtures/*']}
+      },
+      sqlmin: {
+        options: { minify: true, filetypes: ['sql'] },
+        files: { 'tmp/single/min': ['test/fixtures/*']}
+      },
     },
 
     // Unit tests.
