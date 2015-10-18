@@ -48,13 +48,13 @@ exports.pretty_data = {
     test.equal(actual, expected, '03 - xmlmin failed');
     test.done();
   },
-//  json: function (test) {
-//    test.expect(1);
-//    var expected = grunt.file.read('test/expected/single/unmin/test.json');
-//    var actual = grunt.file.read('tmp/single/unmin/test.json');
-//    test.equal(actual, expected, '04 - json failed');
-//    test.done();
-//  },
+  json: function (test) {
+    test.expect(1);
+    var expected = grunt.file.read('test/expected/single/unmin/test.json');
+    var actual = grunt.file.read('tmp/single/unmin/test.json');
+    test.equal(actual, expected, '04 - json failed');
+    test.done();
+  },
   jsonmin: function (test) {
     test.expect(1);
     var expected = grunt.file.read('test/expected/single/min/test.json');
@@ -62,14 +62,4 @@ exports.pretty_data = {
     test.equal(actual, expected, '05 - jsonmin failed');
     test.done();
   },
-
-//  custom_options: function (test) {
-//    test.expect(1);
-//
-//    var actual = grunt.file.read('tmp/custom_options');
-//    var expected = grunt.file.read('test/expected/custom_options');
-//    test.equal(actual, expected, 'should describe what the custom option(s) behavior is.');
-//
-//    test.done();
-//  }
 };

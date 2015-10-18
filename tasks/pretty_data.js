@@ -41,21 +41,22 @@ module.exports = function (grunt) {
         if (grunt.file.exists(filepath) && grunt.file.isFile(filepath) && oFiletypes[filepath.substr(filepath.lastIndexOf('.')+1)]) {
           return true;
         } else {
-          grunt.log.warn(chalk.blue(filepath) + ' will be ignored');
+          grunt.verbose.warn(chalk.blue(filepath) + ' will be ignored');
           return false;
         }
       });
       aMin.forEach(function(filepath) {
         var sMin;
         var sFiletype = filepath.substr(filepath.lastIndexOf('.')+1);
-        grunt.log.writeln(chalk.blue(filepath) + ' will be processed by ' +chalk.red(oFiletypes[sFiletype].name));
         try {
           var sMax = grunt.file.read(filepath);
-          sMin = (oFiletypes[sFiletype].supportComments) ? oFiletypes[sFiletype].fnPrettyData(sMax,options.preserveComments) : oFiletypes[sFiletype].fnPrettyData(sMax,options);
+          //grunt.log.writeln(sFiletype + ' ' + oFiletypes[sFiletype]);
+          var sPdFunction = oFiletypes[sFiletype].name;
+          sMin = (oFiletypes[sFiletype].supportComments) ? pd[sPdFunction](sMax,options.preserveComments) : pd[sPdFunction](sMax);
           var sFile = filepath.match(/\/([^/]*)$/)[1];
           grunt.file.write(file.dest + '/' + sFile,sMin);
           var sOption = (options.preserveComments && oFiletypes[sFiletype].supportComments) ? ' --preserve-comments' : '';
-          grunt.log.writeln(chalk.blue.underline(filepath) + ' written using ' + chalk.red(oFiletypes[sFiletype].name + sOption) + ' to ' + chalk.blue.underline(file.dest + '/' + sFile));
+          grunt.log.writeln(chalk.blue.underline(filepath) + ' written using ' + chalk.red(sPdFunction + sOption) + ' to ' + chalk.blue.underline(file.dest + '/' + sFile) + ' ' + chalk.green(maxmin(sMax,sMin,true)));
         } catch (err) {
           grunt.log.warn(chalk.blue(filepath) + ' has error ' + chalk.red.underline(err));
         }
