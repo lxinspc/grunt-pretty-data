@@ -50,7 +50,6 @@ module.exports = function (grunt) {
         var sFiletype = filepath.substr(filepath.lastIndexOf('.')+1);
         try {
           var sMax = grunt.file.read(filepath);
-          //grunt.log.writeln(sFiletype + ' ' + oFiletypes[sFiletype]);
           var sPdFunction = oFiletypes[sFiletype].name;
           sMin = (oFiletypes[sFiletype].supportComments) ? pd[sPdFunction](sMax,options.preserveComments) : pd[sPdFunction](sMax);
           var sFile = filepath.match(/\/([^/]*)$/)[1];
@@ -61,8 +60,6 @@ module.exports = function (grunt) {
           grunt.log.warn(chalk.blue(filepath) + ' has error ' + chalk.red.underline(err));
         }
       });
-      
-      
     });
   });
 };
