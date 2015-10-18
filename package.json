@@ -1,16 +1,16 @@
 {
   "name": "grunt-pretty-data",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Run pretty data against css, sql, json and xml files",
   "homepage": "https://github.com/lxinspc/grunt-pretty-data",
   "repository": "https://github.com/lxinspc/grunt-pretty-data.git",
   "author": {
     "name": "Nathan Adams",
-    "email": "nathan.adams@bluefinsolutions.com",
+    "email": "nathanadams@gumdropandspider.co.uk",
     "url": "https://github.com/lxinspc/"
   },
   "keywords": [
-    "gruntplugin"
+    "gruntplugin","pretty-data"
   ],
   "main": "Gruntfile.js",
   "engines": {

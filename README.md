@@ -1,6 +1,6 @@
 # grunt-pretty-data [![Build Status](https://travis-ci.org/lxinspc/grunt-pretty-data.svg?branch=master)](https://travis-ci.org/lxinspc/grunt-pretty-data)
 
-> Run pretty data against css, sql, json and xml files
+> Run the nodejs plug in [pretty-data][1] against css, sql, json and xml files.
 
 ## Getting Started
 This plugin requires Grunt.
@@ -26,7 +26,9 @@ In your project's Gruntfile, add a section named `pretty_data` to the data objec
 grunt.initConfig({
   pretty_data: {
     options: {
-      // Task-specific options go here.
+      filetypes: ['css','xml','json','sql']
+      minify: true,             
+      preserveComments: false   
     },
     your_target: {
       // Target-specific file lists and/or options go here.
@@ -37,43 +39,49 @@ grunt.initConfig({
 
 ### Options
 
-#### options.separator
-Type: `String`
-Default value: `',  '`
+#### options.filetypes
+Type: `Array`
+Default value: `['css','xml','json','sql']`
 
-A string value that is used to do something with whatever.
+File types as extensions that will be processed by the grunt script.
 
-#### options.punctuation
-Type: `String`
-Default value: `'.'`
 
-A string value that is used to do something else with whatever else.
+#### options.minify
+Type: `Boolean`
+Default value: `true`
+
+Should file be minified (`true`), or just beautified (`false`).
+
+#### options.preserveComments
+Type: `Boolean`
+Default value: `false`
+
+Should a minified file retain any comments, note, only applies if the file is minified, and is only applied to `css` and `xml` files - as per the options supported in [pretty-data][1]
 
 ### Usage Examples
 
 #### Default Options
-In this example, the default options are used to do something with whatever. So if the `testing` file has the content `Testing` and the `123` file had the content `1 2 3`, the generated result would be `Testing, 1 2 3.`
+In this example, files in `src/testing` and `src/123` which have the extensions `.css`,`.xml`,`.json`,`.sql` will be minified, and no comments preserved
 
 ```js
 grunt.initConfig({
   pretty_data: {
-    options: {},
     files: {
-      'dest/default_options': ['src/testing', 'src/123'],
+       'dest/default_options': ['src/testing', 'src/123']
     },
   },
 })
 ```
 
 #### Custom Options
-In this example, custom options are used to do something else with whatever else. So if the `testing` file has the content `Testing` and the `123` file had the content `1 2 3`, the generated result in this case would be `Testing: 1 2 3 !!!`
+In this example, files in `src/testing` and `src/123` which have the extensions `.xml`,`.json` will be beautified.
 
 ```js
 grunt.initConfig({
   pretty_data: {
     options: {
-      separator: ': ',
-      punctuation: ' !!!',
+      filetypes: ['xml','json'],
+      minify: false,
     },
     files: {
       'dest/default_options': ['src/testing', 'src/123'],
@@ -82,11 +90,34 @@ grunt.initConfig({
 })
 ```
 
+In this example, files in `src/testing` and `src/123` which have the extensions `.css`,`.xml` will be minified, and have any comments preserved.
+
+```js
+grunt.initConfig({
+  pretty_data: {
+    options: {
+      filetypes: ['css','xml'],
+      minify: true,
+      commentsPreserved: true
+    },
+    files: {
+      'dest/default_options': ['src/testing', 'src/123'],
+    },
+  },
+})
+```
+
+
+
 ## Contributing
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
 
 ## Release History
-_(Nothing yet)_
+
+18.10.2015  v.0.1.0   Initial release
 
 ## License
 Copyright (c) 2015 Nathan Adams. Licensed under the MIT license.
+
+
+[1]:https://github.com/vkiryukhin/pretty-data
