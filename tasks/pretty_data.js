@@ -29,7 +29,6 @@ module.exports = function (grunt) {
       var sPdFunction = (options.minify) ? filetype + 'min' : filetype;
       oFiletypes[filetype] = {
         name: sPdFunction,
-        fnPrettyData: pd[sPdFunction],
         supportComments: mSupportComments[filetype]
       };
       grunt.verbose.writeln('Filetype: ' + chalk.cyan(filetype) + ' will be processed with ' + chalk.red('pd.' + sPdFunction));
