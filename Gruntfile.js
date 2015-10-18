@@ -33,28 +33,6 @@ module.exports = function (grunt) {
 
     // Configuration to be run (and then tested).
     "pretty-data": {
-//      default: {
-//        //files: { 'tmp/json': ['test/fixtures'] }
-//      },
-//      minify_all: {
-//        options: { minify: true }
-//        //files: { 'tmp/json': }
-//      },
-//      minify_none: {
-//        options: { minify: false }
-//      },
-//      minify_xml: {
-//        options: { filetypes: ['xml'] }
-//      },
-//      minify_json: {
-//        options: { filetypes: ['json'] }
-//      },
-//      minify_css: {
-//        options: { filetypes: ['css'] }
-//      },
-//      minify_sql: {
-//        options: { filetypes: ['sql'] }
-//      },
       xml: {
         options: { minify: false, filetypes: ['xml'] },
         files: { 'tmp/single/unmin': ['test/fixtures/*']}
@@ -75,14 +53,18 @@ module.exports = function (grunt) {
         options: { minify: true, filetypes: ['json'] },
         files: { 'tmp/single/min': ['test/fixtures/*']}
       },
-//      css: {
-//        options: { minify: false, filetypes: ['css'] }
-//      },
-//      sql: {
-//        options: { minify: false, filetypes: ['sql'] },
-//      },
-      
-      
+      css: {
+        options: { minify: false, filetypes: ['css'] },
+        files: { 'tmp/single/unmin': ['test/fixtures/*']}
+      },
+      cssmincom: {
+        options: { minify: true, preserveComments: true, filetypes: ['css'] },
+        files: { 'tmp/single/mincom': ['test/fixtures/*']}
+      },
+      cssmin: {
+        options: { minify: true, preserveComments: false, filetypes: ['css'] },
+        files: { 'tmp/single/min': ['test/fixtures/*']}
+      },
     },
 
     // Unit tests.

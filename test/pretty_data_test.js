@@ -31,35 +31,56 @@ exports.pretty_data = {
     test.expect(1);
     var expected = grunt.file.read('test/expected/single/unmin/test.xml');
     var actual = grunt.file.read('tmp/single/unmin/test.xml');
-    test.equal(actual, expected, 'File has been pretty printed correctly');
+    test.equal(actual, expected, 'test xml beautify');
     test.done();
   },
   xmlmincom: function (test) {
     test.expect(1);
     var expected = grunt.file.read('test/expected/single/mincom/test.xml');
     var actual = grunt.file.read('tmp/single/mincom/test.xml');
-    test.equal(actual, expected, '02 - xmlmincom failed');
+    test.equal(actual, expected, 'test xml minify preserve comments');
     test.done();
   },
   xmlmin: function (test) {
     test.expect(1);
     var expected = grunt.file.read('test/expected/single/min/test.xml');
     var actual = grunt.file.read('tmp/single/min/test.xml');
-    test.equal(actual, expected, '03 - xmlmin failed');
+    test.equal(actual, expected, 'test xml minify');
     test.done();
   },
   json: function (test) {
     test.expect(1);
     var expected = grunt.file.read('test/expected/single/unmin/test.json');
     var actual = grunt.file.read('tmp/single/unmin/test.json');
-    test.equal(actual, expected, '04 - json failed');
+    test.equal(actual, expected, 'test json beautify');
     test.done();
   },
   jsonmin: function (test) {
     test.expect(1);
     var expected = grunt.file.read('test/expected/single/min/test.json');
     var actual = grunt.file.read('tmp/single/min/test.json');
-    test.equal(actual, expected, '05 - jsonmin failed');
+    test.equal(actual, expected, 'test json minify');
+    test.done();
+  },
+  css: function (test) {
+    test.expect(1);
+    var expected = grunt.file.read('test/expected/single/unmin/test.css');
+    var actual = grunt.file.read('tmp/single/unmin/test.css');
+    test.equal(actual, expected, 'test css beautify');
+    test.done();
+  },
+  cssmincom: function (test) {
+    test.expect(1);
+    var expected = grunt.file.read('test/expected/single/mincom/test.css');
+    var actual = grunt.file.read('tmp/single/mincom/test.css');
+    test.equal(actual, expected, 'test css minify preserve comments');
+    test.done();
+  },
+  cssmin: function (test) {
+    test.expect(1);
+    var expected = grunt.file.read('test/expected/single/min/test.css');
+    var actual = grunt.file.read('tmp/single/min/test.css');
+    test.equal(actual, expected, 'test css minify');
     test.done();
   },
 };
