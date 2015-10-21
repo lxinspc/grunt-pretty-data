@@ -145,4 +145,13 @@ exports.pretty_data = {
     test.equal(actual, expected, 'test sql minify');
     test.done();
   },  
+  doubledot: function (test) {
+    test.expect(2);
+    var expected = grunt.file.read('test/expected/single/unmin/test.view.xml');
+    var actual = grunt.file.read('tmp/single/doubledot/test.xml');
+    test.equal(actual, expected, 'test xml beautify test.xml');
+    actual = grunt.file.read('tmp/single/doubledot/test.view.xml');
+    test.equal(actual, expected, 'test xml beautify test.view.xml');
+    test.done();
+  },
 };

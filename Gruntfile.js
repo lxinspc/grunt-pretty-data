@@ -84,6 +84,10 @@ module.exports = function (grunt) {
         options: { minify: true, filetypes: ['sql'] },
         files: { 'tmp/single/min': ['test/fixtures/*']}
       },
+      doubledot: {
+        options: { minify: false, preserveComments: false, filetypes: ['xml'] },
+        files: {'tmp/single/doubledot': ['test/fixtures/*']}
+      }
     },
 
     // Unit tests.
