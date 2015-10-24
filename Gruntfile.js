@@ -34,59 +34,59 @@ module.exports = function (grunt) {
     // Configuration to be run (and then tested).
     "pretty-data": {
       default: {
-        files: { 'tmp/multiple/default': ['test/fixtures/*'] }
+        files: { 'tmp/multiple/default/': ['test/fixtures/*'] }
       },
       beautify: {
         options: { minify: false },
-        files: { 'tmp/multiple/beautify': ['test/fixtures/*'] }      
+        files: { 'tmp/multiple/beautify/': ['test/fixtures/*'] }      
       },
       preserveComments: {
         options: { minify: true, preserveComments: true },
-        files: { 'tmp/multiple/preserveComments': ['test/fixtures/*'] }      
+        files: { 'tmp/multiple/preserveComments/': ['test/fixtures/*'] }      
       },
       xml: {
         options: { minify: false, filetypes: ['xml'] },
-        files: { 'tmp/single/unmin': ['test/fixtures/*']}
+        files: { 'tmp/single/unmin/xml/': ['test/fixtures/*']}
       },
       xmlmincom: {
         options: { minify: true, preserveComments: true, filetypes: ['xml'] },
-        files: { 'tmp/single/mincom': ['test/fixtures/*']}
+        files: { 'tmp/single/mincom/xml/': ['test/fixtures/*']}
       },
       xmlmin: {
         options: { minify: true, preserveComments: false, filetypes: ['xml'] },
-        files: { 'tmp/single/min': ['test/fixtures/*']}
+        files: { 'tmp/single/min/xml/': ['test/fixtures/*']}
       },
       json: {
         options: { minify: false, filetypes: ['json'] },
-        files: { 'tmp/single/unmin': ['test/fixtures/*']}
+        files: { 'tmp/single/unmin/json/': ['test/fixtures/*']}
       },
       jsonmin: {
         options: { minify: true, filetypes: ['json'] },
-        files: { 'tmp/single/min': ['test/fixtures/*']}
+        files: { 'tmp/single/min/json/': ['test/fixtures/*']}
       },
       css: {
         options: { minify: false, filetypes: ['css'] },
-        files: { 'tmp/single/unmin': ['test/fixtures/*']}
+        files: { 'tmp/single/unmin/css/': ['test/fixtures/*']}
       },
       cssmincom: {
         options: { minify: true, preserveComments: true, filetypes: ['css'] },
-        files: { 'tmp/single/mincom': ['test/fixtures/*']}
+        files: { 'tmp/single/mincom/css/': ['test/fixtures/*']}
       },
       cssmin: {
         options: { minify: true, preserveComments: false, filetypes: ['css'] },
-        files: { 'tmp/single/min': ['test/fixtures/*']}
+        files: { 'tmp/single/min/css/': ['test/fixtures/*']}
       },
       sql: {
         options: { minify: false, filetypes: ['sql'] },
-        files: { 'tmp/single/unmin': ['test/fixtures/*']}
+        files: { 'tmp/single/unmin/sql/': ['test/fixtures/*']}
       },
       sqlmin: {
         options: { minify: true, filetypes: ['sql'] },
-        files: { 'tmp/single/min': ['test/fixtures/*']}
+        files: { 'tmp/single/min/sql/': ['test/fixtures/*']}
       },
       doubledot: {
         options: { minify: false, preserveComments: false, filetypes: ['xml'] },
-        files: {'tmp/single/doubledot': ['test/fixtures/*']}
+        files: {'tmp/single/doubledot/': ['test/fixtures/*']}
       }
     },
 

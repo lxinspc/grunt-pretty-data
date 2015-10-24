@@ -22,128 +22,86 @@ var grunt = require('grunt');
     test.ifError(value)
 */
 
+
+var filetypes = ['json','xml','css','sql','html','js'];
+var neverFind = ['html','js'];
+
+var testSingleFile = function(oTest,sActualRoot,sExpectedRoot,sTestFiletype,sTestDescription) {
+  
+  oTest.expect(filetypes.length);
+  filetypes.forEach(function(sFiletype) {
+    var sFile = sActualRoot + 'test.' + sFiletype;
+    var bExists = grunt.file.exists(sFile);
+    if (sFiletype===sTestFiletype) {
+      var sActual = (bExists) ? grunt.file.read(sFile) : ''; 
+      var sExpected = grunt.file.read(sExpectedRoot + 'test.' + sFiletype);
+      oTest.equal(sActual,sExpected,sTestDescription);
+    } else {
+      oTest.ok(!bExists);
+    }
+  });
+  oTest.done();
+};
+
+var testMultipleFiles = function(oTest,sActualRoot,sExpectedRoot,sTestDescription) {
+  oTest.expect(filetypes.length);
+  filetypes.forEach(function(sFiletype){
+    var sFile = sActualRoot + 'test.' + sFiletype;
+    var bExists = grunt.file.exists(sFile);
+    if (neverFind.indexOf(sFiletype) > -1 ) {
+      oTest.ok(!bExists,sTestDescription + ' test.' + sFiletype + ' existence check');
+    } else {
+      var sActual = (bExists) ? grunt.file.read(sFile) : ''; 
+      var sExpected = grunt.file.read(sExpectedRoot + 'test.' + sFiletype);
+      oTest.equal(sActual,sExpected,sTestDescription + 'test.' + sFiletype + ' equal check');      
+    }
+  }); 
+  oTest.done();
+};
+
 exports.pretty_data = {
   setUp: function (done) {
     // setup here if necessary
     done();
   },
   default: function (test) {
-    test.expect(4);
-    var expected = grunt.file.read('test/expected/single/min/test.xml');
-    var actual = grunt.file.read('tmp/multiple/default/test.xml');
-    test.equal(actual, expected, 'test xml minify');
-    expected = grunt.file.read('test/expected/single/min/test.json');
-    actual = grunt.file.read('tmp/multiple/default/test.json');
-    test.equal(actual, expected, 'test json minify');
-    expected = grunt.file.read('test/expected/single/min/test.css');
-    actual = grunt.file.read('tmp/multiple/default/test.css');
-    test.equal(actual, expected, 'test xml css');
-    expected = grunt.file.read('test/expected/single/min/test.sql');
-    actual = grunt.file.read('tmp/multiple/default/test.sql');
-    test.equal(actual, expected, 'test sql minify');
-    test.done();    
+    testMultipleFiles(test,'tmp/multiple/default/','test/expected/single/min/','Default');
   },
   beautify: function (test) {
-    test.expect(4);
-    var expected = grunt.file.read('test/expected/single/unmin/test.xml');
-    var actual = grunt.file.read('tmp/multiple/beautify/test.xml');
-    test.equal(actual, expected, 'test xml minify');
-    expected = grunt.file.read('test/expected/single/unmin/test.json');
-    actual = grunt.file.read('tmp/multiple/beautify/test.json');
-    test.equal(actual, expected, 'test json minify');
-    expected = grunt.file.read('test/expected/single/unmin/test.css');
-    actual = grunt.file.read('tmp/multiple/beautify/test.css');
-    test.equal(actual, expected, 'test xml css');
-    expected = grunt.file.read('test/expected/single/unmin/test.sql');
-    actual = grunt.file.read('tmp/multiple/beautify/test.sql');
-    test.equal(actual, expected, 'test sql minify');
-    test.done();    
+    testMultipleFiles(test,'tmp/multiple/beautify/','test/expected/single/unmin/','Beautify');
   },
   preserveComments: function (test) {
-    test.expect(4);
-    var expected = grunt.file.read('test/expected/single/mincom/test.xml');
-    var actual = grunt.file.read('tmp/multiple/preserveComments/test.xml');
-    test.equal(actual, expected, 'test xml minify');
-    expected = grunt.file.read('test/expected/single/min/test.json');
-    actual = grunt.file.read('tmp/multiple/preserveComments/test.json');
-    test.equal(actual, expected, 'test json minify');
-    expected = grunt.file.read('test/expected/single/mincom/test.css');
-    actual = grunt.file.read('tmp/multiple/preserveComments/test.css');
-    test.equal(actual, expected, 'test css minify');
-    expected = grunt.file.read('test/expected/single/min/test.sql');
-    actual = grunt.file.read('tmp/multiple/preserveComments/test.sql');
-    test.equal(actual, expected, 'test sql minify');
-    test.done();    
+    testMultipleFiles(test,'tmp/multiple/preserveComments/','test/expected/single/mincom/','Default');
   },
   xml: function (test) {
-    test.expect(1);
-    var expected = grunt.file.read('test/expected/single/unmin/test.xml');
-    var actual = grunt.file.read('tmp/single/unmin/test.xml');
-    test.equal(actual, expected, 'test xml beautify');
-    test.done();
+    testSingleFile(test,'tmp/single/unmin/xml/','test/expected/single/unmin/','xml','xml beautified');
   },
   xmlmincom: function (test) {
-    test.expect(1);
-    var expected = grunt.file.read('test/expected/single/mincom/test.xml');
-    var actual = grunt.file.read('tmp/single/mincom/test.xml');
-    test.equal(actual, expected, 'test xml minify preserve comments');
-    test.done();
+    testSingleFile(test,'tmp/single/mincom/xml/','test/expected/single/mincom/','xml','xml minified preserve comments');
   },
   xmlmin: function (test) {
-    test.expect(1);
-    var expected = grunt.file.read('test/expected/single/min/test.xml');
-    var actual = grunt.file.read('tmp/single/min/test.xml');
-    test.equal(actual, expected, 'test xml minify');
-    test.done();
+    testSingleFile(test,'tmp/single/min/xml/','test/expected/single/min/','xml','xml minified');
   },
   json: function (test) {
-    test.expect(1);
-    var expected = grunt.file.read('test/expected/single/unmin/test.json');
-    var actual = grunt.file.read('tmp/single/unmin/test.json');
-    test.equal(actual, expected, 'test json beautify');
-    test.done();
+    testSingleFile(test,'tmp/single/unmin/json/','test/expected/single/unmin/','json','json beautified');
   },
   jsonmin: function (test) {
-    test.expect(1);
-    var expected = grunt.file.read('test/expected/single/min/test.json');
-    var actual = grunt.file.read('tmp/single/min/test.json');
-    test.equal(actual, expected, 'test json minify');
-    test.done();
+    testSingleFile(test,'tmp/single/min/json/','test/expected/single/min/','json','json minified');
   },
   css: function (test) {
-    test.expect(1);
-    var expected = grunt.file.read('test/expected/single/unmin/test.css');
-    var actual = grunt.file.read('tmp/single/unmin/test.css');
-    test.equal(actual, expected, 'test css beautify');
-    test.done();
+    testSingleFile(test,'tmp/single/unmin/css/','test/expected/single/unmin/','css','css beautified');
   },
   cssmincom: function (test) {
-    test.expect(1);
-    var expected = grunt.file.read('test/expected/single/mincom/test.css');
-    var actual = grunt.file.read('tmp/single/mincom/test.css');
-    test.equal(actual, expected, 'test css minify preserve comments');
-    test.done();
+    testSingleFile(test,'tmp/single/mincom/css/','test/expected/single/mincom/','css','css minified preserve comments');
   },
   cssmin: function (test) {
-    test.expect(1);
-    var expected = grunt.file.read('test/expected/single/min/test.css');
-    var actual = grunt.file.read('tmp/single/min/test.css');
-    test.equal(actual, expected, 'test css minify');
-    test.done();
+    testSingleFile(test,'tmp/single/min/css/','test/expected/single/min/','css','css minified preserve comments');
   },
   sql: function (test) {
-    test.expect(1);
-    var expected = grunt.file.read('test/expected/single/unmin/test.sql');
-    var actual = grunt.file.read('tmp/single/unmin/test.sql');
-    test.equal(actual, expected, 'test sql beautify');
-    test.done();
+    testSingleFile(test,'tmp/single/unmin/sql/','test/expected/single/unmin/','sql','sql beautified');
   },
   sqlmin: function (test) {
-    test.expect(1);
-    var expected = grunt.file.read('test/expected/single/min/test.sql');
-    var actual = grunt.file.read('tmp/single/min/test.sql');
-    test.equal(actual, expected, 'test sql minify');
-    test.done();
+    testSingleFile(test,'tmp/single/min/sql/','test/expected/single/min/','sql','sql minified');
   },  
   doubledot: function (test) {
     test.expect(2);

@@ -52,9 +52,10 @@ module.exports = function (grunt) {
           var sPdFunction = oFiletypes[sFiletype].name;
           sMin = (oFiletypes[sFiletype].supportComments) ? pd[sPdFunction](sMax,options.preserveComments) : pd[sPdFunction](sMax);
           var sFile = filepath.match(/\/([^/]*)$/)[1];
-          grunt.file.write(file.dest + '/' + sFile,sMin);
+          var sDest = (file.dest.substr(file.dest.length - 1) === '/') ? file.dest + sFile : file.dest;
+          grunt.file.write(sDest,sMin);
           var sOption = (options.preserveComments && oFiletypes[sFiletype].supportComments) ? ' --preserve-comments' : '';
-          grunt.log.writeln(chalk.blue.underline(filepath) + ' written using ' + chalk.red(sPdFunction + sOption) + ' to ' + chalk.blue.underline(file.dest + '/' + sFile) + ' ' + chalk.green(maxmin(sMax,sMin,true)));
+          grunt.log.writeln(chalk.blue.underline(filepath) + ' written using ' + chalk.red(sPdFunction + sOption) + ' to ' + chalk.blue.underline(sDest) + ' ' + chalk.green(maxmin(sMax,sMin,true)));
         } catch (err) {
           grunt.log.warn(chalk.blue(filepath) + ' has error ' + chalk.red.underline(err));
         }
