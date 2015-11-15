@@ -36,7 +36,7 @@ module.exports = function (grunt) {
     //Process file supplied
     this.files.forEach(function (file) {
       var aMin = file.src.filter(function (filepath) {
-        //Test to see of file should be processed
+        //Test to see if file should be processed
         if (grunt.file.exists(filepath) && grunt.file.isFile(filepath) && oFiletypes[filepath.substr(filepath.lastIndexOf('.')+1)]) {
           return true;
         } else {
