@@ -9,7 +9,13 @@
 'use strict';
 
 module.exports = function (grunt) {
-
+  var oIS  = {
+    'xml': 'xml',
+    'svg': 'xml',
+    'json': 'json',
+    'css': 'css',
+    'sql': 'sql'
+  };
   var pd = require('pretty-data').pd,
     maxmin = require('maxmin'),
     chalk = require('chalk');
@@ -37,7 +43,7 @@ module.exports = function (grunt) {
     this.files.forEach(function (file) {
       var aMin = file.src.filter(function (filepath) {
         //Test to see of file should be processed
-        if (grunt.file.exists(filepath) && grunt.file.isFile(filepath) && oFiletypes[filepath.substr(filepath.lastIndexOf('.')+1)]) {
+        if (grunt.file.exists(filepath) && grunt.file.isFile(filepath) && oFiletypes[oIS[filepath.substr(filepath.lastIndexOf('.')+1)]]) {
           return true;
         } else {
           grunt.verbose.warn(chalk.blue(filepath) + ' will be ignored');
@@ -46,7 +52,7 @@ module.exports = function (grunt) {
       });
       aMin.forEach(function(filepath) {
         var sMin;
-        var sFiletype = filepath.substr(filepath.lastIndexOf('.')+1);
+        var sFiletype = oIS[filepath.substr(filepath.lastIndexOf('.')+1)];
         try {
           var sMax = grunt.file.read(filepath);
           var sPdFunction = oFiletypes[sFiletype].name;
